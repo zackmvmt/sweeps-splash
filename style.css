@@ -153,6 +153,7 @@ p {
 #signup {
 	width: 326px;
 	float: left;
+	overflow: hidden;
 }
 #signup input {
 	width: 100%;
@@ -168,7 +169,16 @@ p {
 #signup input:focus {
 	border-color: #48c5db;
 }
-#signup #get_started {
+#form {
+	width: 672px;
+	height: 370px;
+}
+#form .page {
+	width: 326px;
+	float: left;
+	margin-right: 10px;
+}
+#signup .btn {
 	width: 140px;
 	background-color: #f61b35;
 	color: #FFF;
@@ -183,7 +193,7 @@ p {
 	padding: 13px 10px 8px 10px;
 	cursor: pointer;
 }
-#signup #get_started i {
+#signup .btn i {
 	background-image: url('sprite.png');
 	background-position: 0 -61px;
 	width: 18px;

@@ -5,6 +5,7 @@
 	    <link href="http://fonts.googleapis.com/css?family=Josefin+Sans:700" type="text/css" rel="stylesheet" />
 	    <link href="style.css" type="text/css" rel="stylesheet" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+		<script src="base64.js" type="text/javascript"></script>
 		<script src="splash.js" type="text/javascript"></script>
 	</head>
 	<body>
@@ -67,14 +68,24 @@
 					<div class="clear"></div>
 					<p>Lorem ipsum dolor sit amet, ea nec velit error appareat, solum suscipit cotidieque est ex, errem laudem no mei.</p>
 					<div id="form">
-					    <input type="text" placeholder="FIRST NAME" id="f_name" />
-					    <input type="text" placeholder="LAST NAME" id="l_name" />
-					    <input type="text" placeholder="EMAIL" id="email" />
-					    <input type="text" placeholder="COMPANY NAME" id="c_name" />
-					    <input type="text" placeholder="PHONE" id="phone" />
-						<div id="get_started">
-							Get Started
-							<i class="icon-chevron-right"></i>
+						<div class="page">
+							<input type="text" placeholder="FIRST NAME" id="f_name" />
+							<input type="text" placeholder="LAST NAME" id="l_name" />
+							<input type="text" placeholder="EMAIL" id="email" />
+							<input type="password" placeholder="PASSWORD" id="password" />
+							<input type="password" placeholder="CONFIRM PASSWORD" id="password_confirm" />
+							<div id="get_started" class="btn">
+								Get Started
+								<i class="icon-chevron-right"></i>
+							</div>
+						</div>
+						<div class="page">
+							<input type="text" placeholder="COMPANY NAME" id="c_name" />
+							<input type="text" placeholder="PHONE" id="phone" />
+							<div class="btn" id="set_up">
+								Sign Up
+								<i class="icon-chevron-right"></i>
+							</div>
 						</div>
 					</div>
 				</div>
