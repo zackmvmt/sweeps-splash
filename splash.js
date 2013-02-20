@@ -1,7 +1,7 @@
 $(function() {
 	
 	var Global = {};
-	Global.Server = 'https://sweeps-api-staging.herokuapp.com';
+	Global.Server = 'https://api-sweepstakes.movementstrategy.com';
 
 	// sign up form
 	$('#get_started').click(function() {
@@ -26,7 +26,7 @@ $(function() {
 			alert('Please enter your password of at least 6 characters');
 			return false;
 		} else if (password != c_password) {
-			alert('You\'r passwords don\'t match');
+			alert('Your passwords don\'t match');
 			return false;
 		 }
 		// save the information
@@ -79,7 +79,7 @@ $(function() {
 	
 	// log in button
 	$('#header #login').click(function() {
-		window.location = 'https://sweeps-dashboard.herokuapp.com';
+		window.location = 'https://sweepstakes.movementstrategy.com';
 	});
 
 	// photo scroller
