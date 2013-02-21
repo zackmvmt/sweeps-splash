@@ -105,6 +105,15 @@ p {
 	width: 350px;
 	height: 350px;
 	background-color: #CCC;
+	overflow: hidden;
+	position: relative;
+}
+#features #slides #main_img .slide {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	background-color: rgba(0, 200, 250, 0.3);
 }
 #features #slides ul {
 	list-style: none;

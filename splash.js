@@ -82,6 +82,25 @@ $(function() {
 		window.location = 'https://sweepstakes.movementstrategy.com';
 	});
 
-	// photo scroller
+	// photo scroller - position the slides initially
+	$('#main_img .slide').each(function() {
+		$(this).css({ left: 350 * $(this).index() + 'px' });
+	});
+	// photo scroller - slideshow
+	$.slider = setInterval(nextSlide, 1000);
+	function nextSlide() {
+		// get the slides
+		var slides = $('#main_img .slide');
+		// animate them over
+		slides.animate({ left: '-=350' }, 500, function() {
+			var pos = $(this).css('left');
+			if (pos == '-350px') $(this).css({ left: '1050px' });
+			if ($(this).hasClass('current')) $(this).removeClass('current');
+			if (pos == '0px') $(this).addClass('current');
+			var current = $('#main_img .slide.current').index();
+			$('#slides ul li').removeClass();
+			$('#slides ul li').eq(current).addClass('current');
+		});
+	}
 	
 });
