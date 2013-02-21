@@ -2,7 +2,7 @@
 body {
 	margin: 0;
 	font-family: 'Open Sans', sans-serif;
-	background-image: url('bg.png');
+	background-image: url('../img/bg.png');
 	margin-bottom: 75px;
 }
 .clear { clear: both; }
@@ -27,7 +27,7 @@ body {
 	height: 80px;
 	border-bottom: 1px solid #CCC;
 	background-color: #FFF;
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 }
 #header #logo {
 	background-color: #48c5db;
@@ -39,7 +39,7 @@ body {
 #header #logo #logo_img {
 	width: 108px;
 	height: 47px;
-	background-image: url('sprite.png');
+	background-image: url('../img/sprite.png');
 	margin-top: 15px;
 	margin-left: 13px;
 }
@@ -66,7 +66,7 @@ body {
 #header #login i {
 	width: 14px;
 	height: 14px;
-	background-image: url('sprite.png');
+	background-image: url('../img/sprite.png');
 	background-position: 0 -47px;
 	display: block;
 	float: left;
@@ -83,15 +83,21 @@ body {
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+a {
+	color: #CCC;
+	text-decoration: none;
+}
 p {
 	color: #7d7d7d;
 	font-size: 14px;
 	margin-top: 10px;
 }
 #intro {
-	margin-bottom: 10px;
+	margin-top: 10px;
+	width: 960px;
 }
 #features {
+	height: 410px;
 	width: 600px;
 	float: left;
 	margin-right: 10px;
@@ -104,7 +110,6 @@ p {
 #features #slides #main_img {
 	width: 350px;
 	height: 350px;
-	background-color: #CCC;
 	overflow: hidden;
 	position: relative;
 }
@@ -113,7 +118,6 @@ p {
 	height: 100%;
 	position: absolute;
 	top: 0;
-	background-color: rgba(0, 200, 250, 0.3);
 }
 #features #slides ul {
 	list-style: none;
@@ -162,6 +166,7 @@ p {
 	font-size: 23px;
 }
 #signup {
+	height: 410px;
 	width: 326px;
 	float: left;
 	overflow: hidden;
@@ -206,7 +211,7 @@ p {
 	cursor: pointer;
 }
 #signup .btn i {
-	background-image: url('sprite.png');
+	background-image: url('../img/sprite.png');
 	background-position: 0 -61px;
 	width: 18px;
 	height: 18px;

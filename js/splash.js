@@ -2,6 +2,10 @@ $(function() {
 	
 	var Global = {};
 	Global.Server = 'https://api-sweepstakes.movementstrategy.com';
+	var auth = 'Basic ' + Base64.encode('5IUl3fKao5' + ':' + '426LJy7887QzxC2VG434UmZl2d4brc54');
+
+	// mash
+	$('input#phone').mask('(999) 999-9999');
 
 	// sign up form
 	$('#get_started').click(function() {
@@ -28,11 +32,25 @@ $(function() {
 		} else if (password != c_password) {
 			alert('Your passwords don\'t match');
 			return false;
-		 }
-		// save the information
-		Global.User = { first_name: f_name, last_name: l_name, email: email, password: password };
-		// show the next step
-		$('#form .page:first').animate({ 'margin-left': '-=336px' }, 500);
+		}
+		// validate that user does not already exist
+		$.ajax({
+			type: 'GET',
+			url: Global.Server + '/users?email=' + email,
+			headers: { Authorization: auth },
+			contentType: 'application/json',
+			data: JSON.stringify(Global.Client),
+			success: function(user, textStatus, jqXHR) {
+				if (user.length) {
+					alert('Email already exists.');
+					return false;
+				}
+				// save the information
+				Global.User = { first_name: f_name, last_name: l_name, email: email, password: password };
+				// show the next step
+				$('#form .page:first').animate({ 'margin-left': '-=336px' }, 500);
+			}
+		});
 	});
 
 	$('#set_up').click(function() {
@@ -44,13 +62,13 @@ $(function() {
 			alert('Please enter your company name');
 			return false;
 		} else if (phone == '') {
-			alert('Please enter your phone numebr');
+			alert('Please enter a contact phone number');
 			return false;
 		}
+
 		// save the information
 		Global.Client = { name: c_name, phone: phone };
 		// create client
-		var auth = 'Basic ' + Base64.encode('5IUl3fKao5' + ':' + '426LJy7887QzxC2VG434UmZl2d4brc54');
 		$.ajax({
 			type: 'POST',
 			url: Global.Server + '/clients',
@@ -58,8 +76,10 @@ $(function() {
 			contentType: 'application/json',
 			data: JSON.stringify(Global.Client),
 			success: function(client, textStatus, jqXHR) {
-				console.log('client', client);
-				// TODO handle success / error messages
+				if (typeof client._id === 'undefined') {
+					alert('An unknown error occured.');
+					return false;
+				}
 				Global.User.clients = [client._id];
 				// create user
 				$.ajax({
@@ -68,9 +88,12 @@ $(function() {
 					headers: { Authorization: auth },
 					contentType: 'application/json',
 					data: JSON.stringify(Global.User),
-					success: function(user, testStatus, jqXHR) {
-						console.log('user', user);
-						// TODO handle success / error messages
+					success: function(user, textStatus, jqXHR) {
+						if (typeof user._id === 'undefined') {
+							alert('An unknown error occured.');
+							return false;
+						}
+						window.location = 'https://sweepstakes.movementstrategy.com';
 					}
 				});
 			}
@@ -87,7 +110,7 @@ $(function() {
 		$(this).css({ left: 350 * $(this).index() + 'px' });
 	});
 	// photo scroller - slideshow
-	$.slider = setInterval(nextSlide, 1000);
+	$.slider = setInterval(nextSlide, 3000);
 	function nextSlide() {
 		// get the slides
 		var slides = $('#main_img .slide');
