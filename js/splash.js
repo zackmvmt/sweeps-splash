@@ -39,6 +39,7 @@ $(function() {
 			url: Global.Server + '/users?email=' + email,
 			headers: { Authorization: auth },
 			contentType: 'application/json',
+			dataType: 'json',
 			data: JSON.stringify(Global.Client),
 			success: function(user, textStatus, jqXHR) {
 				if (user.length) {
@@ -74,6 +75,7 @@ $(function() {
 			url: Global.Server + '/clients',
 			headers: { Authorization: auth },
 			contentType: 'application/json',
+			dataType: 'json',
 			data: JSON.stringify(Global.Client),
 			success: function(client, textStatus, jqXHR) {
 				if (typeof client._id === 'undefined') {
@@ -87,6 +89,7 @@ $(function() {
 					url: Global.Server + '/users',
 					headers: { Authorization: auth },
 					contentType: 'application/json',
+					dataType: 'json',
 					data: JSON.stringify(Global.User),
 					success: function(user, textStatus, jqXHR) {
 						if (typeof user._id === 'undefined') {
