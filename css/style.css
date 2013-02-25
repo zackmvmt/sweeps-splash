@@ -123,11 +123,11 @@ p {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	padding-left: 120px;
+	padding-left: 140px;
 }
 #features #slides ul li {
-	width: 20px;
-	height: 20px;
+	width: 10px;
+	height: 10px;
 	float: left;
 	background-color: #CCC;
 	margin: 10px 5px;
@@ -142,6 +142,7 @@ p {
 #features #list {
 	width: 200px;
 	float: left;
+	margin-top: 44px;
 	/* font-family: 'Josefin Sans', sans-serif; */
 	/* font-weight: 700; */
 	/* text-transform: uppercase; */
@@ -164,6 +165,7 @@ p {
 	margin: 20px;
 	margin-right: 0;
 	font-size: 23px;
+	width: 100%;
 }
 #signup {
 	height: 410px;
