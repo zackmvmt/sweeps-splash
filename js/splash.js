@@ -96,6 +96,12 @@ $(function() {
 							alert('An unknown error occured.');
 							return false;
 						}
+						// cookies so they are auto logged in
+						var exp = new Date();
+						var now = exp.setTime(exp.getTime() + (1200 * 1000)); // 20 minute expiration
+						document.cookie = 'cid=' + client._id + ';expires=' + exp.toGMTString() + ';path=/;secure;';
+						document.cookie = 'uid=' + user._id + ';expires=' + exp.toGMTString() + ';path=/;secure;';
+						// redirect to app
 						window.location = 'https://sweepstakes.movementstrategy.com';
 					}
 				});
