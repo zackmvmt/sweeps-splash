@@ -9,12 +9,14 @@ $(function() {
 
 	// sign up form
 	$('#get_started').click(function() {
+
 		// get all the fields
 		var f_name = $('input#f_name').val();
 		var l_name = $('input#l_name').val();
 		var email = $('input#email').val();
 		var password = $('input#password').val();
 		var c_password = $('input#password_confirm').val();
+
 		// validate fields
 		var email_reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 		if (f_name == '') {
@@ -33,6 +35,7 @@ $(function() {
 			alert('Your passwords don\'t match');
 			return false;
 		}
+
 		// validate that user does not already exist
 		$.ajax({
 			type: 'GET',
@@ -52,12 +55,15 @@ $(function() {
 				$('#form .page:first').animate({ 'margin-left': '-=336px' }, 500);
 			}
 		});
+
 	});
 
 	$('#set_up').click(function() {
+
 		// get the remaining fields
 		var c_name = $('input#c_name').val();
 		var phone = $('input#phone').val();
+
 		// validate the fields
 		if (c_name == '') {
 			alert('Please enter your company name');
@@ -69,44 +75,62 @@ $(function() {
 
 		// save the information
 		Global.Client = { name: c_name, phone: phone };
-		// create client
-		$.ajax({
-			type: 'POST',
-			url: Global.Server + '/clients',
-			headers: { Authorization: auth },
-			contentType: 'application/json',
-			dataType: 'json',
-			data: JSON.stringify(Global.Client),
-			success: function(client, textStatus, jqXHR) {
-				if (typeof client._id === 'undefined') {
-					alert('An unknown error occured.');
-					return false;
-				}
-				Global.User.clients = [client._id];
-				// create user
-				$.ajax({
-					type: 'POST',
-					url: Global.Server + '/users',
-					headers: { Authorization: auth },
-					contentType: 'application/json',
-					dataType: 'json',
-					data: JSON.stringify(Global.User),
-					success: function(user, textStatus, jqXHR) {
-						if (typeof user._id === 'undefined') {
-							alert('An unknown error occured.');
-							return false;
-						}
-						// cookies so they are auto logged in
-						var exp = new Date();
-						var now = exp.setTime(exp.getTime() + (1200 * 1000)); // 20 minute expiration
-						document.cookie = 'cid=' + client._id + ';expires=' + exp.toGMTString() + ';path=/;secure;';
-						document.cookie = 'uid=' + user._id + ';expires=' + exp.toGMTString() + ';path=/;secure;';
-						// redirect to app
-						window.location = 'https://sweepstakes.movementstrategy.com';
+
+		// make sure that button is not disabled (prevent multiple ajax calls)
+		if (typeof $('#set_up').attr('disabled') === 'undefined') {
+
+			// create client
+			$.ajax({
+				type: 'POST',
+				url: Global.Server + '/clients',
+				headers: { Authorization: auth },
+				contentType: 'application/json',
+				dataType: 'json',
+				data: JSON.stringify(Global.Client),
+				beforeSend: function() {
+					$('#set_up').attr('disabled', true);
+				},
+				success: function(client, textStatus, jqXHR) {
+
+					if (typeof client._id === 'undefined') {
+						alert('An unknown error occured.');
+						return false;
 					}
-				});
-			}
-		});
+
+					Global.User.clients = [client._id];
+
+					// create user
+					$.ajax({
+						type: 'POST',
+						url: Global.Server + '/users',
+						headers: { Authorization: auth },
+						contentType: 'application/json',
+						dataType: 'json',
+						data: JSON.stringify(Global.User),
+						success: function(user, textStatus, jqXHR) {
+
+							if (typeof user._id === 'undefined') {
+								alert('An unknown error has occured.');
+								return false;
+							}
+
+							// cookies so they are auto logged in
+							var exp = new Date();
+							var now = exp.setTime(exp.getTime() + (1200 * 1000)); // 20 minute expiration
+							document.cookie = 'cid=' + client._id + ';expires=' + exp.toGMTString() + ';path=/;secure;';
+							document.cookie = 'uid=' + user._id + ';expires=' + exp.toGMTString() + ';path=/;secure;';
+
+							// redirect to app
+							window.location = 'https://sweepstakes.movementstrategy.com';
+
+						}
+					});
+
+				}
+			});
+
+		}
+
 	});
 	
 	// log in button
