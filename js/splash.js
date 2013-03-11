@@ -4,8 +4,23 @@ $(function() {
 	Global.Server = 'https://api-sweepstakes.movementstrategy.com';
 	var auth = 'Basic ' + Base64.encode('5IUl3fKao5' + ':' + '426LJy7887QzxC2VG434UmZl2d4brc54');
 
-	// mash
+	// mask
 	$('input#phone').mask('(999) 999-9999');
+
+	// enter keys
+	$('input').keypress(function(e) {
+		if (e.keyCode == 13) {
+			var input = $(this).attr('id');
+			// if first step
+			if (input == 'f_name' || input == 'l_name' || input == 'email' || input == 'password' || input == 'password_confirm') {
+				$('#get_started').focus().click();
+			}
+			// if second step
+			if (input == 'c_name' || input == 'phone') {
+				$('#set_up').focus().click();
+			}
+		}
+	});
 
 	// sign up form
 	$('#get_started').click(function() {
